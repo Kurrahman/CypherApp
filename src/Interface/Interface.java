@@ -82,7 +82,8 @@ public class Interface implements ActionListener {
             display.displayAutoKeyVigenere(frame);
         }
         if (e.getSource() == extVigenere) {
-            System.out.println("Extended Vigenere");
+            ExtendedVigenere display = new ExtendedVigenere();
+            display.displayExtendedVigenere(frame);
         }
         if (e.getSource() == playFair) {
             System.out.println("PlayFair");
