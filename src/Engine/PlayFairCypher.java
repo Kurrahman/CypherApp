@@ -72,14 +72,14 @@ public class PlayFairCypher {
                 } else {
                     if (tmp == lastChar) {
                         out.append("X ").append(tmp);
-                        if (i == length - 1){
+                        if (i == length - 1) {
                             out.append('X');
                             break;
                         }
                         lastChar = 'X';
                     } else if (tmp == 'X') {
                         out.append("X X");
-                        if (i == length - 1){
+                        if (i == length - 1) {
                             out.append('X');
                         }
                         lastChar = tmp;
@@ -94,7 +94,7 @@ public class PlayFairCypher {
         return out.toString();
     }
 
-    public static String encrypt(String plain, String key){
+    public static String encrypt(String plain, String key) {
         generateSquare(key);
         String[] bigraphs = generateBigraph(plain).split(" ");
 
@@ -139,7 +139,7 @@ public class PlayFairCypher {
         return out.toString().trim();
     }
 
-    public static String decrypt(String cypher, String key){
+    public static String decrypt(String cypher, String key) {
         generateSquare(key);
         String[] bigraphs = cypher.split(" ");
 
@@ -188,6 +188,6 @@ public class PlayFairCypher {
         System.out.println(PlayFairCypher.generateBigraph("temui ibu nanti malax"));
         String cypher = PlayFairCypher.encrypt("temui ibu nanti malax", "JALAN GANESHA SEPULUH");
         System.out.println(cypher);
-        System.out.println(PlayFairCypher.decrypt(cypher,"JALAN GANESHA SEPULUH"));
+        System.out.println(PlayFairCypher.decrypt(cypher, "JALAN GANESHA SEPULUH"));
     }
 }

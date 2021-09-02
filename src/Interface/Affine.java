@@ -1,7 +1,6 @@
 package Interface;
 
 import Engine.AffineCypher;
-import Engine.PlayFairCypher;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,9 +9,9 @@ import java.awt.event.ActionListener;
 public class Affine extends Template implements ActionListener {
     private JComboBox<Integer> coprime;
     private JTextField shift;
-    private Integer[] coprimeList = {1, 3, 5, 7, 9,11,13,15,17,19,21,23,25};
+    private final Integer[] coprimeList = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25};
 
-    public void displayAffine(JFrame frame){
+    public void displayAffine(JFrame frame) {
         displayBase(frame);
 
         JLabel coprimeLabel = new JLabel("Coprime : ");
@@ -30,7 +29,7 @@ public class Affine extends Template implements ActionListener {
         frame.add(shiftLabel);
 
         shift = new JTextField();
-        shift.setBounds(350,190,80,30);
+        shift.setBounds(350, 190, 80, 30);
         shift.setBorder(textArea);
         frame.add(shift);
 

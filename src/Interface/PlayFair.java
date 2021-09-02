@@ -1,7 +1,6 @@
 package Interface;
 
 import Engine.PlayFairCypher;
-import Engine.VigenereCypher;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
