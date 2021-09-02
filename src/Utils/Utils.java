@@ -26,6 +26,16 @@ public class Utils {
         return (char)(cypher + 65);
     }
 
+    public static char extendedVigenereTranspose(char plain, char key){
+        int cypher = ((int) plain) + ((int) key) % 256;
+        return (char) cypher ;
+    }
+
+    public static char extendedVigenereTransposeReverse(char plain, char key){
+        int cypher = (((int) plain) - ((int) key) + 256) % 256;
+        return (char)cypher;
+    }
+
     public static int charToInt(char c){
         return ((int) c - 65) % 26;
     }

@@ -42,9 +42,6 @@ public class Template implements ActionListener {
         decryptBtn.addActionListener(this);
         decryptBtn.setBounds(350, 70, 80, 30);
         frame.add(decryptBtn);
-
-        frame.setVisible(false);
-        frame.setVisible(true);
     }
 
     @Override
