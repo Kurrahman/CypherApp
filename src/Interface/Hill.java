@@ -5,7 +5,6 @@ import Engine.HillCypher;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class Hill extends Template implements ActionListener {
     private JTextField[][] key3, key2;
@@ -120,8 +119,8 @@ public class Hill extends Template implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == inverseBtn){
-            if (keySize.getSelectedIndex() == 1){
+        if (e.getSource() == inverseBtn) {
+            if (keySize.getSelectedIndex() == 1) {
                 int[][] key = new int[3][3];
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
@@ -161,7 +160,7 @@ public class Hill extends Template implements ActionListener {
             }
         }
         if (e.getSource() == decryptBtn) {
-            if (keySize.getSelectedIndex() == 1){
+            if (keySize.getSelectedIndex() == 1) {
                 int[][] key = new int[3][3];
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
@@ -180,7 +179,7 @@ public class Hill extends Template implements ActionListener {
             }
         }
         if (e.getSource() == encryptBtn) {
-            if (keySize.getSelectedIndex() == 1){
+            if (keySize.getSelectedIndex() == 1) {
                 int[][] key = new int[3][3];
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {

@@ -98,7 +98,8 @@ public class Interface implements ActionListener {
             display.displayHill(frame);
         }
         if (e.getSource() == enigma) {
-            System.out.println("Enigma");
+            Enigma display = new Enigma();
+            display.displayEnigma(frame);
         }
     }
 }
