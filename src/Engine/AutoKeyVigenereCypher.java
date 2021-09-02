@@ -1,11 +1,10 @@
 package Engine;
 
-import Interface.AutoKeyVigenere;
 import Utils.Utils;
 
 public class AutoKeyVigenereCypher {
 
-    public static String encrypt(String plain, String key){
+    public static String encrypt(String plain, String key) {
         StringBuilder cypher = new StringBuilder();
         String upPlain = plain.toUpperCase();
         String upKey = key.toUpperCase() + upPlain;
@@ -17,14 +16,14 @@ public class AutoKeyVigenereCypher {
         int keyPointer = 0;
 
         char plainChar, keyChar;
-        while (plainPointer < plainLength){
+        while (plainPointer < plainLength) {
             plainChar = upPlain.charAt(plainPointer);
             keyChar = upKey.charAt(keyPointer);
 
-            if ((((int)plainChar) < 65) || (((int)plainChar) > 90)){
+            if (!Utils.isAlphabet(plainChar)) {
                 plainPointer += 1;
                 cypher.append(plainChar);
-            } else if ((((int)keyChar) < 65) || (((int)keyChar) > 90)){
+            } else if (!Utils.isAlphabet(keyChar)) {
                 keyPointer = (keyPointer + 1) % keyLength;
             } else {
                 plainPointer += 1;
@@ -35,7 +34,7 @@ public class AutoKeyVigenereCypher {
         return cypher.toString();
     }
 
-    public static String decrypt(String cypher, String key){
+    public static String decrypt(String cypher, String key) {
         StringBuilder plain = new StringBuilder();
         String upCypher = cypher.toUpperCase();
         String upKey = key.toUpperCase();
@@ -46,14 +45,14 @@ public class AutoKeyVigenereCypher {
         int keyPointer = 0;
 
         char cypherChar, keyChar;
-        while (cypherPointer < cypherLength){
+        while (cypherPointer < cypherLength) {
             cypherChar = upCypher.charAt(cypherPointer);
             keyChar = upKey.charAt(keyPointer);
 
-            if ((((int)cypherChar) < 65) || (((int)cypherChar) > 90)){
+            if (!Utils.isAlphabet(cypherChar)) {
                 cypherPointer += 1;
                 plain.append(cypherChar);
-            } else if ((((int)keyChar) < 65) || (((int)keyChar) > 90)){
+            } else if (!Utils.isAlphabet(keyChar)) {
                 keyPointer += keyPointer + 1;
             } else {
                 cypherPointer += 1;
@@ -76,6 +75,6 @@ public class AutoKeyVigenereCypher {
         String key = "langitbiru";
         String cypher = AutoKeyVigenereCypher.encrypt(plain, key);
         System.out.println(cypher);
-        System.out.println(AutoKeyVigenereCypher.decrypt(cypher,key));
+        System.out.println(AutoKeyVigenereCypher.decrypt(cypher, key));
     }
 }

@@ -1,7 +1,6 @@
 package Interface;
 
 import Engine.ExtendedVigenereCypher;
-import Engine.VigenereCypher;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +9,7 @@ import java.awt.event.ActionListener;
 public class ExtendedVigenere extends Template implements ActionListener {
     private JTextArea key;
 
-    public void displayExtendedVigenere(JFrame frame){
+    public void displayExtendedVigenere(JFrame frame) {
         displayBase(frame);
 
         JLabel keyLabel = new JLabel("Vigenere Key : ");

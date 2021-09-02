@@ -4,7 +4,6 @@ import Engine.PlayFairCypher;
 import Engine.VigenereCypher;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,7 +12,7 @@ public class PlayFair extends Template implements ActionListener {
     private JDialog bigraphDialog, squareDialog;
     private JTextArea key, bigraph;
 
-    public void displayPlayFair(JFrame frame){
+    public void displayPlayFair(JFrame frame) {
         displayBase(frame);
 
         JLabel keyLabel = new JLabel("PlayFair Key : ");
@@ -38,13 +37,13 @@ public class PlayFair extends Template implements ActionListener {
 
         squareDialog = new JDialog(frame, "Square Key", true);
         squareDialog.setLayout(null);
-        squareDialog.setSize(300,300);
+        squareDialog.setSize(300, 300);
         squareDialog.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         squareDialog.setVisible(false);
 
         bigraphDialog = new JDialog(frame, "Plain Text Bigraph", true);
         bigraphDialog.setLayout(null);
-        bigraphDialog.setSize(400,300);
+        bigraphDialog.setSize(400, 300);
         bigraphDialog.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         bigraphDialog.setVisible(false);
 
@@ -52,7 +51,7 @@ public class PlayFair extends Template implements ActionListener {
         frame.setVisible(true);
     }
 
-    private void displaySquareDialog(){
+    private void displaySquareDialog() {
         squareDialog.getContentPane().removeAll();
         PlayFairCypher.generateSquare(key.getText());
         Character[][] data = {
@@ -69,24 +68,27 @@ public class PlayFair extends Template implements ActionListener {
             }
         }
 
-        String[] column = {"","","","",""};
-        JTable square = new JTable(data,column);
+        String[] column = {"", "", "", "", ""};
+        JTable square = new JTable(data, column);
         for (int i = 0; i < 5; i++) {
             square.getColumnModel().getColumn(i).setPreferredWidth(50);
             square.setRowHeight(40);
         }
-        square.setBounds(10,10,250,220);
+        square.setBounds(10, 10, 250, 220);
         squareDialog.add(square);
 
         squareDialog.setVisible(true);
     }
 
-    private void displayBigraphDialog(){
+    private void displayBigraphDialog() {
         bigraphDialog.getContentPane().removeAll();
 
         bigraph = new JTextArea();
         bigraph.setBorder(textArea);
-        bigraph.setBounds(10,10,280,280);
+        bigraph.setBounds(10, 10, 360, 240);
+
+        bigraph.setText(PlayFairCypher.generateBigraph(plain.getText()));
+        bigraph.setEditable(false);
         bigraphDialog.add(bigraph);
 
         bigraphDialog.setVisible(true);
@@ -94,17 +96,17 @@ public class PlayFair extends Template implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == squareBtn){
+        if (e.getSource() == squareBtn) {
             displaySquareDialog();
         }
-        if (e.getSource() == bigraphBtn){
+        if (e.getSource() == bigraphBtn) {
             displayBigraphDialog();
         }
         if (e.getSource() == decryptBtn) {
-            plain.setText(VigenereCypher.decrypt(cypher.getText(), key.getText()));
+            plain.setText(PlayFairCypher.decrypt(cypher.getText(), key.getText()));
         }
         if (e.getSource() == encryptBtn) {
-            cypher.setText(VigenereCypher.encrypt(plain.getText(), key.getText()));
+            cypher.setText(PlayFairCypher.encrypt(plain.getText(), key.getText()));
         }
     }
 

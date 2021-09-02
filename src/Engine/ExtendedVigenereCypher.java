@@ -45,6 +45,7 @@ public class ExtendedVigenereCypher {
         }
         return plain.toString();
     }
+
     public static void main(String[] args) {
 
         String plain = "Semburan lumpur panas di desa Porong, Sidoarjo, Jawa Timur belum\n" +
@@ -54,7 +55,7 @@ public class ExtendedVigenereCypher {
                 "manusia tidak berhasil menutupi lubang semburan. Jika semburan\n" +
                 "lumpur tidak berhenti juga, mungkin Jawa Timur akan tenggelam";
         String key = "langitbiru";
-        String cypher = ExtendedVigenereCypher.encrypt(plain,key);
+        String cypher = ExtendedVigenereCypher.encrypt(plain, key);
         System.out.println(cypher);
         System.out.println(VigenereCypher.decrypt(cypher, key));
     }

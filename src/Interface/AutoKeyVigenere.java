@@ -1,7 +1,6 @@
 package Interface;
 
 import Engine.AutoKeyVigenereCypher;
-import Engine.VigenereCypher;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,7 +26,7 @@ public class AutoKeyVigenere extends Template implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         if (e.getSource() == decryptBtn) {
             plain.setText(AutoKeyVigenereCypher.decrypt(cypher.getText(), key.getText()));
         }

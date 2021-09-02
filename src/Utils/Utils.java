@@ -4,51 +4,56 @@ import java.util.Random;
 
 public class Utils {
     static Random gen;
-    public static char caesarTranspose(char plain, int offset){
+
+    public static char caesarTranspose(char plain, int offset) {
         // Asumsi seluruh karakter yang diterima merupakan huruf kapital
         int cypher = (((int) plain) - 65 + offset) % 26;
-        return (char)(cypher + 65);
+        return (char) (cypher + 65);
     }
 
-    public static char caesarTransposeReverse(char plain, int offset){
+    public static char caesarTransposeReverse(char plain, int offset) {
         // Asumsi seluruh karakter yang diterima merupakan huruf kapital
         int cypher = (((int) plain) - 65 - offset + 26) % 26;
-        return (char)(cypher + 65);
+        return (char) (cypher + 65);
     }
 
-    public static char vigenereTranspose(char plain, char key){
+    public static char vigenereTranspose(char plain, char key) {
         int cypher = ((((int) plain) - 65) + (((int) key) - 65)) % 26;
-        return (char)(cypher + 65);
+        return (char) (cypher + 65);
     }
 
-    public static char vigenereTransposeReverse(char plain, char key){
+    public static char vigenereTransposeReverse(char plain, char key) {
         int cypher = ((((int) plain) - 65) - (((int) key) - 65) + 26) % 26;
-        return (char)(cypher + 65);
+        return (char) (cypher + 65);
     }
 
-    public static char extendedVigenereTranspose(char plain, char key){
+    public static char extendedVigenereTranspose(char plain, char key) {
         int cypher = ((int) plain) + ((int) key) % 256;
-        return (char) cypher ;
+        return (char) cypher;
     }
 
-    public static char extendedVigenereTransposeReverse(char plain, char key){
+    public static char extendedVigenereTransposeReverse(char plain, char key) {
         int cypher = (((int) plain) - ((int) key) + 256) % 256;
-        return (char)cypher;
+        return (char) cypher;
     }
 
-    public static int charToInt(char c){
+    public static boolean isAlphabet(char c) {
+        return ((((int) c) > 64) && (((int) c) < 91));
+    }
+
+    public static int charToInt(char c) {
         return ((int) c - 65) % 26;
     }
 
-    public static char intToChar(int i){
+    public static char intToChar(int i) {
         return (char) (i + 65);
     }
 
-    public static void setRandomSeed(int seed){
+    public static void setRandomSeed(int seed) {
         gen = new Random(seed);
     }
 
-    public static char getNextRandomChar(){
+    public static char getNextRandomChar() {
         return (char) (gen.nextInt(26) + 65);
     }
 
