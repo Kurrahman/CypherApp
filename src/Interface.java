@@ -1,5 +1,4 @@
-package Interface;
-
+import Interface.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,11 +61,6 @@ public class Interface implements ActionListener {
         initFrame();
     }
 
-    public static void main(String[] args) {
-        Interface i = new Interface();
-        i.initInterface();
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vigenere) {
@@ -101,5 +95,10 @@ public class Interface implements ActionListener {
             Enigma display = new Enigma();
             display.displayEnigma(frame);
         }
+    }
+
+    public static void main(String[] args) {
+        Interface i = new Interface();
+        i.initInterface();
     }
 }
