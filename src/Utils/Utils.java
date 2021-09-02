@@ -27,6 +27,20 @@ public class Utils {
         return (char) (cypher + 65);
     }
 
+    public static int modulo(int a, int b){
+        return ((a % b) + b) % b;
+    }
+
+    public static int invModulo(int a, int b){
+        int i;
+        for (i = 1; i < b; i++) {
+            if (modulo(a*i, b) == 1){
+                break;
+            }
+        }
+        return i;
+    }
+
     public static char extendedVigenereTranspose(char plain, char key) {
         int cypher = ((int) plain) + ((int) key) % 256;
         return (char) cypher;
@@ -55,6 +69,20 @@ public class Utils {
 
     public static char getNextRandomChar() {
         return (char) (gen.nextInt(26) + 65);
+    }
+
+    public static int[][] matrixMultiplication(int[][] a, int[][] b){
+        int[][] c = new int[a.length][b[0].length];
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < b[0].length; j++) {
+                c[i][j] = 0;
+                for (int k = 0; k < b[0].length; k++) {
+                    c[i][j] += a[i][k] * b[k][j];
+                }
+                c[i][j] = c[i][j] % 26;
+            }
+        }
+        return c;
     }
 
     public static void main(String[] args) {

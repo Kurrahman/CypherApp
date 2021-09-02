@@ -86,13 +86,16 @@ public class Interface implements ActionListener {
             display.displayExtendedVigenere(frame);
         }
         if (e.getSource() == playFair) {
-            System.out.println("PlayFair");
+            PlayFair display = new PlayFair();
+            display.displayPlayFair(frame);
         }
         if (e.getSource() == affine) {
-            System.out.println("Affine");
+            Affine display = new Affine();
+            display.displayAffine(frame);
         }
         if (e.getSource() == hill) {
-            System.out.println("Hill");
+            Hill display = new Hill();
+            display.displayHill(frame);
         }
         if (e.getSource() == enigma) {
             System.out.println("Enigma");
