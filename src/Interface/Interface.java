@@ -11,21 +11,21 @@ public class Interface implements ActionListener {
     JMenuBar menuBar;
     JFrame frame;
 
-    private void initFrame(){
+    private void initFrame() {
         frame = new JFrame("CypherApp");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setJMenuBar(menuBar);
-        frame.setSize(800,600);
+        frame.setSize(800, 600);
         frame.setLayout(null);
         frame.setVisible(true);
     }
 
-    private void initMenuBar(){
+    private void initMenuBar() {
         menuBar = new JMenuBar();
         menuBar.add(cypherMenu);
     }
 
-    private void initCypherMenu(){
+    private void initCypherMenu() {
         cypherMenu = new JMenu("Cypher");
 
         vigenere = new JMenuItem("Vigenere");
@@ -56,7 +56,7 @@ public class Interface implements ActionListener {
         cypherMenu.add(enigma);
     }
 
-    public void initInterface(){
+    public void initInterface() {
         initCypherMenu();
         initMenuBar();
         initFrame();
@@ -69,30 +69,31 @@ public class Interface implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == vigenere){
+        if (e.getSource() == vigenere) {
             Vigenere display = new Vigenere();
             display.displayVigenere(frame);
         }
-        if (e.getSource() == fullVigenere){
+        if (e.getSource() == fullVigenere) {
             FullVigenere display = new FullVigenere();
             display.displayFullVigenere(frame);
         }
-        if (e.getSource() == autoKeyVigenere){
-            System.out.println("Auto-Key Vigenere");
+        if (e.getSource() == autoKeyVigenere) {
+            AutoKeyVigenere display = new AutoKeyVigenere();
+            display.displayAutoKeyVigenere(frame);
         }
-        if (e.getSource() == extVigenere){
+        if (e.getSource() == extVigenere) {
             System.out.println("Extended Vigenere");
         }
-        if (e.getSource() == playFair){
+        if (e.getSource() == playFair) {
             System.out.println("PlayFair");
         }
-        if (e.getSource() == affine){
+        if (e.getSource() == affine) {
             System.out.println("Affine");
         }
-        if (e.getSource() == hill){
+        if (e.getSource() == hill) {
             System.out.println("Hill");
         }
-        if (e.getSource() == enigma){
+        if (e.getSource() == enigma) {
             System.out.println("Enigma");
         }
     }
