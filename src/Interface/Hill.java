@@ -119,6 +119,9 @@ public class Hill extends Template implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (saveAndLoad(e)){
+            super.actionPerformed(e);
+        }
         if (e.getSource() == inverseBtn) {
             if (keySize.getSelectedIndex() == 1) {
                 int[][] key = new int[3][3];

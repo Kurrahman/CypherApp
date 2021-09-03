@@ -31,6 +31,9 @@ public class Enigma extends Template implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (saveAndLoad(e)){
+            super.actionPerformed(e);
+        }
         if (e.getSource() == decryptBtn) {
             Integer[] key = new Integer[]{
                     Integer.parseInt(keys[0].getText()),

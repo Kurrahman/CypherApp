@@ -27,6 +27,9 @@ public class AutoKeyVigenere extends Template implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (saveAndLoad(e)){
+            super.actionPerformed(e);
+        }
         if (e.getSource() == decryptBtn) {
             plain.setText(AutoKeyVigenereCypher.decrypt(cypher.getText(), key.getText()));
         }
