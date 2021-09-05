@@ -156,10 +156,14 @@ public class Hill extends Template implements ActionListener {
         if (e.getSource() == keySize) {
             if (keySize.getSelectedIndex() == 1) {
                 hideKey(key2);
+                hideKey(invKey2);
                 showKey(key3);
+                showKey(invKey3);
             } else {
                 hideKey(key3);
+                hideKey(invKey3);
                 showKey(key2);
+                showKey(invKey2);
             }
         }
         if (e.getSource() == decryptBtn) {

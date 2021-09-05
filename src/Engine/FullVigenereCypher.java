@@ -48,7 +48,7 @@ public class FullVigenereCypher {
 
             if (!Utils.isAlphabet(plainChar)) {
                 plainPointer += 1;
-                cypher.append(plainChar);
+//                cypher.append(plainChar);
             } else if (!Utils.isAlphabet(keyChar)) {
                 keyPointer = (keyPointer + 1) % keyLength;
             } else {

@@ -31,7 +31,7 @@ public class AffineCypher {
             if (Utils.isAlphabet(c)) {
                 out.append(encryptMap.get(c));
             } else {
-                out.append(c);
+//                out.append(c);
             }
         }
 
@@ -47,7 +47,7 @@ public class AffineCypher {
             if (Utils.isAlphabet(c)) {
                 out.append(decryptMap.get(c));
             } else {
-                out.append(c);
+//                out.append(c);
             }
         }
 

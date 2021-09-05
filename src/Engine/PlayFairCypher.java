@@ -141,7 +141,14 @@ public class PlayFairCypher {
 
     public static String decrypt(String cypher, String key) {
         generateSquare(key);
-        String[] bigraphs = cypher.split(" ");
+        StringBuilder tmp = new StringBuilder();
+        tmp.append(cypher.toUpperCase().replaceAll("[^A-Z]", "").trim());
+        for (int i = 0; i < tmp.length(); i++) {
+            if (i % 3 == 2){
+                tmp.insert(i,' ');
+            }
+        }
+        String[] bigraphs = tmp.toString().split(" ");
 
         StringBuilder out = new StringBuilder();
         for (String bigraph : bigraphs) {

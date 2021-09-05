@@ -4,7 +4,7 @@ import Utils.Utils;
 
 public class EnigmaCypher {
     private static final Integer[] WHEEL_0 = {0, 18, 9, 13, 25, 19, 7, 15, 6, 21, 3, 10, 4, 16, 8, 11, 22, 17, 1, 24, 5, 23, 12, 20, 2, 14};
-    private static final Integer[] WHEEL_1 = {0, 5, 3, 14, 2, 13, 11, 22, 4, 15, 1, 21, 18, 10, 17, 24, 23, 12, 8, 9, 7, 20, 8, 25, 16, 19};
+    private static final Integer[] WHEEL_1 = {0, 5, 3, 14, 2, 13, 11, 22, 4, 15, 1, 21, 18, 10, 17, 24, 23, 12, 6, 9, 7, 20, 8, 25, 16, 19};
     private static final Integer[] WHEEL_2 = {7, 17, 25, 16, 19, 21, 9, 2, 12, 10, 3, 22, 4, 23, 8, 11, 24, 15, 18, 5, 14, 20, 1, 6, 0, 13};
 
     private static final Integer[][] wheels = new Integer[3][26];
@@ -63,6 +63,7 @@ public class EnigmaCypher {
         for (int i = 0; i < 3; i++) {
             tmp = wheels[i][tmp];
         }
+
         tmp = Utils.modulo(tmp + 13, 26);
 
         for (int i = 2; i >= 0; i--) {
@@ -106,23 +107,22 @@ public class EnigmaCypher {
                 rotateWheelNext(wheels[i]);
             }
         }
-        for (int i = 0; i < length - 1; i++) {
-            rotateNext();
-        }
-        int i = length - 1;
-        while (i >= 0) {
+        int i = 0;
+        while (i < length) {
             int c = Utils.charToInt(upCypher.charAt(i));
             c = pass(c);
-            rotatePrev();
+            rotateNext();
             out.append(Utils.intToChar(c));
-            i--;
+            i++;
         }
-        return out.reverse().toString().trim();
+        return out.toString().trim();
     }
 
     public static void main(String[] args) {
-        String cyp = EnigmaCypher.encrypt("asek", new Integer[]{0, 0, 0});
-        System.out.println(cyp);
-        System.out.println(EnigmaCypher.decrypt(cyp, new Integer[]{0, 0, 0}));
+        char[] alph = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+        for (char c : alph) {
+            StringBuilder tmp = new StringBuilder();
+            System.out.println(c + " : " + encrypt(tmp.append(c).toString(), new Integer[]{11, 25, 3}));
+        }
     }
 }

@@ -55,7 +55,7 @@ public class ExtendedVigenere extends Template implements ActionListener {
     }
 
     private void writeByteFile(byte[] content){
-        File tmp = new File(fc.getSelectedFile().getParent() + "\\output");
+        File tmp = new File(fc.getSelectedFile().getAbsolutePath().replaceAll(fc.getSelectedFile().getName(),"") + "\\output");
 //        System.out.println(tmp.getAbsolutePath());
         try (FileOutputStream stream = new FileOutputStream(tmp.getAbsolutePath())){
             stream.write(content);
