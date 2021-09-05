@@ -47,9 +47,18 @@ public class Utils {
         return (char) cypher;
     }
 
+    public static byte extendedVigenereByteTranspose(byte plain, byte key) {
+        int cypher = ((plain) + (key) % 256) - 128;
+        return (byte) cypher;
+    }
+
     public static char extendedVigenereTransposeReverse(char plain, char key) {
         int cypher = (((int) plain) - ((int) key) + 256) % 256;
         return (char) cypher;
+    }
+    public static byte extendedVigenereByteTransposeReverse(byte plain, byte key) {
+        int cypher = (((plain + 128) - (key + 128) + 256) % 256) - 128;
+        return (byte) cypher;
     }
 
     public static boolean isAlphabet(char c) {
@@ -87,17 +96,7 @@ public class Utils {
     }
 
     public static void main(String[] args) {
-        int[][] key = {
-                {17, 17, 5},
-                {21, 18, 21},
-                {2, 2, 19}
-        };
-
-        int[][] tri = {
-                {15},
-                {0},
-                {24},
-        };
-        System.out.println(Arrays.deepToString(Utils.matrixMultiplication(key, tri)));
+        System.out.println(Utils.extendedVigenereByteTranspose((byte) -1, (byte)'r'));
+        System.out.println(Utils.extendedVigenereByteTransposeReverse((byte) -15, (byte)'r'));
     }
 }

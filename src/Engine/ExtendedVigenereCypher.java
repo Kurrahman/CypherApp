@@ -2,6 +2,9 @@ package Engine;
 
 import Utils.Utils;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
 public class ExtendedVigenereCypher {
 
     public static String encrypt(String plain, String key) {
@@ -25,6 +28,29 @@ public class ExtendedVigenereCypher {
         return cypher.toString();
     }
 
+    public static byte[] encryptByte(byte[] plain, String key){
+        int plainLength = plain.length;
+        int keyLength = key.length();
+        byte[] cypher = new byte[plainLength];
+        byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
+
+
+        int plainPointer = 0;
+        int keyPointer = 0;
+        int cypherPointer = 0;
+
+        byte plainByte, keyByte;
+        while (plainPointer < plainLength) {
+            plainByte = plain[plainPointer];
+            keyByte = keyBytes[keyPointer];
+
+            plainPointer += 1;
+            keyPointer = (keyPointer + 1) % keyLength;
+            cypher[cypherPointer++] = Utils.extendedVigenereByteTranspose(plainByte, keyByte);
+        }
+        return cypher;
+    }
+
     public static String decrypt(String cypher, String key) {
         StringBuilder plain = new StringBuilder();
 
@@ -46,17 +72,37 @@ public class ExtendedVigenereCypher {
         return plain.toString();
     }
 
+    public static byte[] decryptByte(byte[] cypher, String key){
+        int plainLength = cypher.length;
+        int keyLength = key.length();
+        byte[] plain = new byte[plainLength];
+        byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
+
+
+        int cypherPointer = 0;
+        int keyPointer = 0;
+        int plainPointer = 0;
+
+        byte cypherByte, keyByte;
+        while (plainPointer < plainLength) {
+            cypherByte = cypher[cypherPointer];
+            keyByte = keyBytes[keyPointer];
+
+            cypherPointer += 1;
+            keyPointer = (keyPointer + 1) % keyLength;
+            plain[plainPointer++] = Utils.extendedVigenereByteTransposeReverse(cypherByte, keyByte);
+        }
+        return plain;
+    }
+
     public static void main(String[] args) {
 
-        String plain = "Semburan lumpur panas di desa Porong, Sidoarjo, Jawa Timur belum\n" +
-                "juga berakhir. Sudah beberapa desa tenggelam. Entah sudah berapa\n" +
-                "rumah, bangunan, pabrik, dan sawah yang tenggelam.\n" +
-                "Sampai kapan semburan lumpur berhenti, tiada yang tahu. Teknologi\n" +
-                "manusia tidak berhasil menutupi lubang semburan. Jika semburan\n" +
-                "lumpur tidak berhenti juga, mungkin Jawa Timur akan tenggelam";
-        String key = "langitbiru";
-        String cypher = ExtendedVigenereCypher.encrypt(plain, key);
-        System.out.println(cypher);
-        System.out.println(VigenereCypher.decrypt(cypher, key));
+        byte[] plain = {-1, -40, -1, -32, 0, 16, 74, 70, 73, 70, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, -1, -37, 0};
+        String key = "random";
+        byte[] cypher = ExtendedVigenereCypher.encryptByte(plain, key);
+
+        System.out.println(Arrays.toString(plain));
+        System.out.println(Arrays.toString(cypher));
+        System.out.println(Arrays.toString(ExtendedVigenereCypher.decryptByte(cypher, key)));
     }
 }

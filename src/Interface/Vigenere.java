@@ -21,13 +21,14 @@ public class Vigenere extends Template implements ActionListener {
         key.setLineWrap(true);
         key.setBounds(30, 450, 720, 70);
         frame.add(key);
-        frame.setVisible(false);
-        frame.setVisible(true);
+
+        frame.getContentPane().setVisible(false);
+        frame.getContentPane().setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (saveAndLoad(e)){
+        if (templateAction(e)) {
             super.actionPerformed(e);
         }
         if (e.getSource() == decryptBtn) {

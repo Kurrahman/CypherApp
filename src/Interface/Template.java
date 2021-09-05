@@ -1,5 +1,7 @@
 package Interface;
 
+import Engine.ExtendedVigenereCypher;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.event.ActionEvent;
@@ -8,12 +10,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Template implements ActionListener {
     protected JTextArea plain, cypher;
-    protected JButton encryptBtn, decryptBtn, loadPlain, savePlain, loadCypher, saveCypher;
+    protected JButton encryptBtn, decryptBtn, loadPlain, savePlain, loadCypher, saveCypher, splitCypher;
     protected JFileChooser fc;
+    protected JScrollPane plainScroll, cypherScroll;
     Border textArea = BorderFactory.createLoweredBevelBorder();
 
     public void displayBase(JFrame frame) {
@@ -51,13 +56,21 @@ public class Template implements ActionListener {
         plain.setBorder(textArea);
         plain.setLineWrap(true);
         plain.setBounds(30, 30, 300, 400);
+
+        plainScroll = new JScrollPane(plain);
+        plainScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         frame.add(plain);
+        frame.add(plainScroll);
 
         cypher = new JTextArea();
         cypher.setBorder(textArea);
         cypher.setLineWrap(true);
         cypher.setBounds(450, 30, 300, 400);
+
+        cypherScroll = new JScrollPane(cypher);
+        cypherScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         frame.add(cypher);
+        frame.add(cypherScroll);
 
         encryptBtn = new JButton("Encrypt");
         encryptBtn.addActionListener(this);
@@ -69,25 +82,31 @@ public class Template implements ActionListener {
         decryptBtn.setBounds(350, 70, 80, 30);
         frame.add(decryptBtn);
 
+        splitCypher = new JButton("Split");
+        splitCypher.addActionListener(this);
+        splitCypher.setBounds(350, 400, 80, 30);
+        frame.add(splitCypher);
+
         fc = new JFileChooser(System.getProperty("user.dir"));
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
     }
 
-    protected boolean saveAndLoad(ActionEvent e){
+    protected boolean templateAction(ActionEvent e) {
         return (
                 (e.getSource() == loadPlain) ||
-                (e.getSource() == savePlain) ||
-                (e.getSource() == loadCypher) ||
-                (e.getSource() == saveCypher)
+                        (e.getSource() == savePlain) ||
+                        (e.getSource() == loadCypher) ||
+                        (e.getSource() == saveCypher) ||
+                        (e.getSource() == splitCypher)
         );
     }
 
-    private String readFile(File file){
+    private String readFile(File file) {
         StringBuilder out = new StringBuilder();
         Scanner scanner = null;
         try {
             scanner = new Scanner(file);
-            while (scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 out.append(scanner.nextLine());
             }
             return out.toString().trim();
@@ -97,7 +116,7 @@ public class Template implements ActionListener {
         return null;
     }
 
-    private void writeFile(String fileDir, String content){
+    private void writeFile(String fileDir, String content) {
         try {
             FileWriter writer = new FileWriter(fileDir);
             writer.write(content);
@@ -109,33 +128,47 @@ public class Template implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loadPlain){
+        if (e.getSource() == loadPlain) {
             int retVal = fc.showOpenDialog(null);
-            if (retVal == JFileChooser.APPROVE_OPTION){
+            if (retVal == JFileChooser.APPROVE_OPTION) {
                 plain.setText(readFile(fc.getSelectedFile()));
             }
         }
-        if (e.getSource() == savePlain){
+        if (e.getSource() == savePlain) {
             int retVal = fc.showSaveDialog(null);
-            if (retVal == JFileChooser.APPROVE_OPTION){
+            if (retVal == JFileChooser.APPROVE_OPTION) {
                 writeFile(fc.getSelectedFile().getAbsolutePath(), plain.getText());
             }
         }
-        if (e.getSource() == loadCypher){
+        if (e.getSource() == loadCypher) {
             int retVal = fc.showOpenDialog(null);
-            if (retVal == JFileChooser.APPROVE_OPTION){
+            if (retVal == JFileChooser.APPROVE_OPTION) {
                 cypher.setText(readFile(fc.getSelectedFile()));
             }
         }
-        if (e.getSource() == saveCypher){
+        if (e.getSource() == saveCypher) {
             int retVal = fc.showSaveDialog(null);
-            if (retVal == JFileChooser.APPROVE_OPTION){
+            if (retVal == JFileChooser.APPROVE_OPTION) {
                 writeFile(fc.getSelectedFile().getAbsolutePath(), cypher.getText());
             }
+        }
+        if (e.getSource() == splitCypher){
+            StringBuilder s = new StringBuilder();
+            s.append(cypher.getText().toUpperCase().replaceAll("[^A-Z]", "").trim());
+            int i = 0;
+            while (i < s.length()){
+                if (i % 6 == 5){
+                    s.insert(i,' ');
+                }
+                i++;
+            }
+            cypher.setText(s.toString().trim());
         }
     }
 
     public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir"));
+        String test = "randomnum123,./ \n";
+        test = ExtendedVigenereCypher.encrypt(test, "random");
+        System.out.println(Arrays.toString(test.getBytes(StandardCharsets.UTF_8)));
     }
 }
